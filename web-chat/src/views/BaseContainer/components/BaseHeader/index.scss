@@ -1,0 +1,16 @@
+.header{
+    height: 60px;
+    background-color: #3448A1;
+    background: linear-gradient(to right, #1D93EC, #3448A1);
+    position: relative;
+
+    .headPortrait{
+        position: absolute;
+    }
+
+    .tabMenus{
+        float: left;
+        margin-left: 50%;
+        transform: translateX(-50%);
+    }
+}
