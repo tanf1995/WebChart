@@ -39,8 +39,9 @@ const useTypeScript = fs.existsSync(paths.appTsConfig);
 
 // style files regexes
 const cssRegex = /\.css$/;
-const cssModuleRegex = /\.css$/;
+const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
+// const sassModuleRegex = /\.module\.(scss|sass)$/;
 const sassModuleRegex = /\.(scss|sass)$/;
 
 // This is the production and development configuration.
@@ -354,6 +355,11 @@ module.exports = function(webpackEnv) {
                       },
                     },
                   ],
+                  ["import", {
+                    "libraryName": "antd",
+                    "libraryDirectory": "es",
+                    "style": "css" // `style: true` 会加载 less 文件
+                  }]
                 ],
                 // This is a feature of `babel-loader` for webpack (not Babel itself).
                 // It enables caching results in ./node_modules/.cache/babel-loader/

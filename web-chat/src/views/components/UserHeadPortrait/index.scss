@@ -1,3 +1,14 @@
 .head{
+    height: 60px;
+    line-height: 60px;
+    padding: 0 15px;
+}
+
+.menu{
+    :global(.ant-dropdown-menu){
+        :global(.ant-dropdown-menu-item){
+            padding: 5px 20px;
+        }
+    }
     
 }

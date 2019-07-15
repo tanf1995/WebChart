@@ -1,0 +1,31 @@
+.list{
+    background-color: #FAFAFA;
+
+    .menu{
+        border-bottom: 1px solid #eee;
+        overflow: hidden;
+
+        :global(.ant-btn){
+            margin: 5px;
+            margin-right: 10px;
+            float: right;
+
+            &.unfold{
+                transform: rotate(-180deg);
+                border: none;
+            }
+        }
+    }
+
+    :global(.ant-menu){
+        overflow: hidden;
+        min-height: 550px;
+
+        :global(.ant-menu-item){
+            width: 250px;
+            height: unset;
+            padding: 0 !important;
+            margin: 0;
+        }
+    }
+}

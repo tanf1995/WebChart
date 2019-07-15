@@ -3,7 +3,6 @@ import styles from './index.scss';
 import BaseHeader from './components/BaseHeader';
 import SessionList from './components/SessionList';
 import MainContent from './components/MainContent';
-import {Button} from 'antd';
 
 
 const BaseContainer: FC = () => {
