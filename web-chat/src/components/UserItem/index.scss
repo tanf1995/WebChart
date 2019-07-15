@@ -2,6 +2,7 @@
     height: 60px;
     padding: 5px 10px;
     border-bottom: 1px solid #eee;
+    width: 200px;
 
     :global(.ant-avatar){
         text-align: center;
@@ -14,5 +15,11 @@
 
     .name{
         margin-left: 10px;
+    }
+
+    &.collapsed{
+        .name{
+            // display: none;
+        }
     }
 }

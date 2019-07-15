@@ -1,11 +1,13 @@
-import React, {FC} from 'react';
+import React from 'react';
 import styles from './index.scss';
 import BaseHeader from './components/BaseHeader';
 import SessionList from './components/SessionList';
-import MainContent from './components/MainContent';
 
 
-const BaseContainer: FC = () => {
+interface Props{
+    children: any
+}
+const BaseContainer = ({children}: Props) => {
     return (
         <div className={styles.container}>
             <BaseHeader />
@@ -13,7 +15,9 @@ const BaseContainer: FC = () => {
             <div className={styles.wrap}>
                 <SessionList className={styles.sessionList} />
 
-                <MainContent className={styles.mainContent} />
+                <div className={styles.mainContent}>
+                    {children}
+                </div>
             </div>
         </div>
     )

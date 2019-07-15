@@ -24,19 +24,21 @@ export default class RouteRecursion extends Component<Props>{
                 <Route 
                     path={path}
                     render= {(props: any) => (
-                        <RouteComponent {...res2} {...props}>
-                            <Switch>
-                                {childrenRoute.map(route => {
-                                    if(route.redirect){
-                                        return <Redirect from={route.path} to={route.redirect} 
-                                            exact key={route.path} />
-                                    }else{
-                                        return <RouteRecursion {...route} key={route.path} />
-                                    }
-                                })}
-                                <Redirect from='*' to='/notfound'/>
-                            </Switch>
-                        </RouteComponent>
+                        <Suspense fallback={<PageLoading />}>
+                            <RouteComponent {...res2} {...props}>
+                                <Switch>
+                                    {childrenRoute.map(route => {
+                                        if(route.redirect){
+                                            return <Redirect from={route.path} to={route.redirect} 
+                                                exact key={route.path} />
+                                        }else{
+                                            return <RouteRecursion {...route} key={route.path} />
+                                        }
+                                    })}
+                                    <Redirect from='*' to='/notfound'/>
+                                </Switch>
+                            </RouteComponent>
+                        </Suspense>
                     )}
                 />
             )

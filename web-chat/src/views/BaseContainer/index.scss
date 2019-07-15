@@ -7,14 +7,10 @@
     overflow: hidden;
 
     .wrap{
-        overflow: hidden;
-
-        .sessionList{
-            float: left;
-        }
+        display: flex;
     
         .mainContent{
-            float: left;
+            width: 100%;
         }
     }
 }

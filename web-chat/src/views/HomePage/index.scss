@@ -1,0 +1,13 @@
+.home{
+    height: 100%;
+    line-height: 100%;
+    position: relative;
+
+    .bg{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 80px;
+    }
+}

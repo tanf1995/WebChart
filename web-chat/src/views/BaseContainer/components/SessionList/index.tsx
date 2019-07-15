@@ -26,10 +26,11 @@ const SessionList = ({className}: Props) => {
 
             <Menu mode="inline"
                 inlineCollapsed={isCollapsed}
+                overflowedIndicator={<span>tx</span>}
             >
                 {userList.map((user, index) => (
                     <Menu.Item key={index}>
-                        <UserItem />
+                        <UserItem menuIsCollapsed={isCollapsed} />
                     </Menu.Item>
                 ))}
             </Menu>

@@ -22,10 +22,17 @@
         min-height: 550px;
 
         :global(.ant-menu-item){
-            width: 250px;
             height: unset;
             padding: 0 !important;
             margin: 0;
+        }
+
+        &:global(.ant-menu-inline-collapsed){
+            width: 52px;
+
+            :global(.ant-menu-item){
+                width: 52px;
+            }
         }
     }
 }
