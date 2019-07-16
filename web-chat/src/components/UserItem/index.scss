@@ -22,4 +22,18 @@
             // display: none;
         }
     }
+
+    &.mini{
+        height: 40px;
+
+        :global(.ant-avatar){
+            i{
+                font-size: 12px;
+            }
+        }
+
+        .name{
+            font-size: 12px;
+        }
+    }
 }

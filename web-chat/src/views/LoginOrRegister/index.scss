@@ -1,0 +1,42 @@
+.container{
+    box-shadow: 0 0 5px 1px gray;
+    width: 1000px;
+    height: 650px;
+    margin: 20px auto 0;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #2D3A4B;
+    color: #fff;
+    text-align: center;
+    padding-top: 150px;
+
+    h2{
+        color: #fff;
+        margin-bottom: 30px;
+    }
+
+    .inp{
+        width: 400px;
+        margin: 20px auto;
+        
+        :global(.ant-input){
+            background-color: #283443;
+            box-shadow: none;
+            border-color: #777 !important;
+            color: #fff;
+        }
+
+        i{
+            color: #fff;
+        }
+    }
+
+    .sub{
+        display: block;
+        width: 400px;
+        background-color: #111;
+        border: none;
+        color: #fff;
+        margin: 10px auto;
+    }
+}

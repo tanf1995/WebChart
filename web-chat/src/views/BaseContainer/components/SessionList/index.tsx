@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Menu, Button } from 'antd';
 import styles from './index.scss';
 import UserItem from '@/components/UserItem';
+import {Link} from 'react-router-dom';
 
 
 interface Props{
@@ -9,7 +10,7 @@ interface Props{
 }
 const SessionList = ({className}: Props) => {
     let [isCollapsed, setCollapsed] = useState(false);
-    let [userList, setUserList] = useState(["", ""]);
+    let [userList] = useState(["", ""]);
 
     const handleSetMenuStatus = () => {
         setCollapsed(!isCollapsed);
@@ -30,7 +31,9 @@ const SessionList = ({className}: Props) => {
             >
                 {userList.map((user, index) => (
                     <Menu.Item key={index}>
-                        <UserItem menuIsCollapsed={isCollapsed} />
+                        <Link to="/chat/kobe">
+                            <UserItem menuIsCollapsed={isCollapsed} />
+                        </Link>
                     </Menu.Item>
                 ))}
             </Menu>
