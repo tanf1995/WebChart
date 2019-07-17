@@ -11,6 +11,13 @@ const identity = {
             method: 'POST',
             data: accent
         })
+    },
+    register(accent: Accent){
+        return axios({
+            url: "/register",
+            method: "POST",
+            data: accent
+        })
     }
 }
 

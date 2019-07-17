@@ -29,12 +29,33 @@ const LoginOrRegister = ({match}: Props) => {
         if(isLoginPage){
             identity.login(accent)
                 .then(res => {
-                    console.log(res);
+                    if(res.data.errCode === 0){
+                        message.success("Login success!");
+                    }else{
+                        message.error(res.data.msg);
+                    }
                 })
                 .catch(err => {
                     console.log(err);
+                    message.error('Server error!');
+                })
+        }else{
+            identity.register(accent)
+                .then(res => {
+                    if(res.data.errCode === 0){
+                        message.success("Register success!");
+                    }else{
+                        message.error(res.data.msg);
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                    message.error('Server error!');
                 })
         }
+    }
+    const handleKeydown = (e: any) => {
+        if(e.keyCode === 13) handleSubmit();
     }
 
     useEffect(() => {
@@ -49,12 +70,14 @@ const LoginOrRegister = ({match}: Props) => {
                 <Input prefix={<Icon type="user" />} 
                     value={accent.username}
                     onChange={e => handleSetAccent({username: e.target.value})}
+                    onKeyDown={handleKeydown}
                 />
             </div>
             <div className={styles.inp}>
                 <PasswdInput 
                     value={accent.pwd}
                     handleSetAccent={handleSetAccent}
+                    handleKeydown={handleKeydown}
                 />
             </div>
             

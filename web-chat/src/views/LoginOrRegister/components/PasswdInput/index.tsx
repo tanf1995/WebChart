@@ -4,9 +4,10 @@ import {Input, Icon} from 'antd';
 
 interface Props{
     value: string,
-    handleSetAccent: Function
+    handleSetAccent: Function,
+    handleKeydown: (e: any) => void
 }
-const PasswdInput = ({value, handleSetAccent}: Props) => {
+const PasswdInput = ({value, handleSetAccent, handleKeydown}: Props) => {
     const [isShowPwd, setIsShowPwd] = useState(false);
 
     const handleSetPwdStatus = () => {
@@ -25,6 +26,7 @@ const PasswdInput = ({value, handleSetAccent}: Props) => {
             type={isShowPwd? "text": "password"}
             value={value}
             onChange={e => handleSetAccent({pwd: e.target.value})}
+            onKeyDown={handleKeydown}
         />
     )
 }
