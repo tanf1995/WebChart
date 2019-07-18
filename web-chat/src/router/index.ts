@@ -17,6 +17,7 @@ const routes: any[] = [
     {
         path: '/',
         RouteComponent: BaseContainer,
+        needLogin: true,
         childrenRoute: [
             {
                 path: "/",

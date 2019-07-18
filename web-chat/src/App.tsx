@@ -4,7 +4,7 @@ import RouteRecursion from '@/components/RouteRecursion';
 import routes from '@/router';
 
 
-const App: React.FC = () => {
+const App = () => {
     return (
         <Router>
             <Switch>

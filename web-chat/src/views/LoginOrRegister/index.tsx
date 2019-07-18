@@ -4,16 +4,21 @@ import {Input, Button, Icon, message} from 'antd';
 import PasswdInput from './components/PasswdInput';
 import {Link} from 'react-router-dom';
 import identity from '@/request/api/identity';
+import {observer} from 'mobx-react';
+import Cookies from 'cookies-ts';
+import axiosIns from '@/request';
 
 
 interface Props{
-    match: any
+    match: any,
+    history: any,
+    location: any
 }
 interface Accent{
     username?: string,
     pwd?: string
 }
-const LoginOrRegister = ({match}: Props) => {
+const LoginOrRegister = ({match, history, location}: Props) => {
     const [accent, setAccent] = useState({
         username: "",
         pwd: ""
@@ -21,6 +26,17 @@ const LoginOrRegister = ({match}: Props) => {
     const [isLoginPage, setIsLoginPage] = useState(true);
     const handleSetAccent = (partOfAccent: Accent) => {
         setAccent(Object.assign({}, accent, partOfAccent));
+    }
+    const handleLogin = (token: string) => {
+        const whiteRoute = ["/login", "/register"];
+
+        axiosIns.defaults.headers["Authorization"] = token;
+        (new Cookies()).set("token", token);
+        if(location.state && location.state.from && !whiteRoute.includes(location.state.from)){
+            history.replace(location.state.from);
+        }else{
+            history.replace('/');
+        }
     }
     const handleSubmit = () => {
         if(!accent.username || !accent.pwd){
@@ -31,6 +47,7 @@ const LoginOrRegister = ({match}: Props) => {
                 .then(res => {
                     if(res.data.errCode === 0){
                         message.success("Login success!");
+                        handleLogin(res.data.data.token);
                     }else{
                         message.error(res.data.msg);
                     }
@@ -44,6 +61,7 @@ const LoginOrRegister = ({match}: Props) => {
                 .then(res => {
                     if(res.data.errCode === 0){
                         message.success("Register success!");
+                        handleLogin(res.data.data.token);
                     }else{
                         message.error(res.data.msg);
                     }
@@ -93,4 +111,4 @@ const LoginOrRegister = ({match}: Props) => {
     )
 }
 
-export default LoginOrRegister;
+export default observer(LoginOrRegister);
