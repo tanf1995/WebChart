@@ -4,12 +4,15 @@ const KoaBody = require('koa-body');
 const routerHandler = require('./routes');
 const crossDomain = require('./middleware/crossDomain');
 const consoleReq = require('./middleware/consoleReq');
+const permissionRouteControl = require('./middleware/permissionRouteControl');
 
 
 //middleware
 app.use(KoaBody());
 app.use(crossDomain());
 app.use(consoleReq());
+const whiteRoutes = ['/login', '/register'];
+app.use(permissionRouteControl(whiteRoutes));
 
 // router
 routerHandler(app);

@@ -10,6 +10,8 @@
 
 - mongoose(5.0) http://www.mongoosejs.net/docs/guide.html
 
+- ioredis https://github.com/luin/ioredis
+
 ## 功能点
 
 ### 用户认证 - JWT

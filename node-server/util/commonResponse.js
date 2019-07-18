@@ -18,6 +18,12 @@ const commonRes = {
         ctx.body = {
             errCode: 1
         }
+    },
+    unauthorized(ctx){
+        ctx.response.status = 401;
+        ctx.body = {
+            errCode: 1
+        }
     }
 }
 

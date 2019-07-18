@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "ioredis": "^4.11.2",
+    "jsonwebtoken": "^8.5.1",
     "koa": "^2.7.0",
     "koa-body": "^4.1.0",
     "koa-router": "^7.4.0",
