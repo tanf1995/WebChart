@@ -19,7 +19,7 @@ const permissionRouteControl = (whiteRoutes) => {
                 const expires = Number(decode.expires);
                 const current_time = (new Date()).getTime();
 
-                // redis中取最后保存的token
+                // redis中取最后保存的token验证
                 const redis_token = await redisClient.hget("userTokens", decode.username);
                 if(redis_token !== token){
                     return commonReq.unauthorized(ctx);
@@ -28,15 +28,15 @@ const permissionRouteControl = (whiteRoutes) => {
                 if(expires - current_time < 0){
                     // 过期
                     return commonReq.unauthorized(ctx);
-                }else if(expires - current_time <= 24*60*60*1000){
-                    // 距过期时间小于一天，更新token
+                }else{
                     const q_user = await UserModel.findOne({username: decode.username});
 
-                    ctx.body.token = q_user.createToken();
-                    await next();
-                }else{
-                    await next();
+                    if(expires - current_time <= 24*60*60*1000){
+                        ctx.body.token = q_user.createToken();
+                    }
+                    ctx.request.current_user = q_user;
                 }
+                await next();
             }catch(err){
                 return commonReq.unauthorized(ctx);
             }

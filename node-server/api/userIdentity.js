@@ -61,9 +61,17 @@ function main(){
         })
     }
 
+    const logout = router => {
+        router.get('/logout', async ctx => {
+            ctx.request.current_user.logout();
+            commonRes.ok(ctx, 0, "Logout success");
+        })
+    }
+
     module.exports = {
         register,
-        login
+        login,
+        logout
     }
 }
 

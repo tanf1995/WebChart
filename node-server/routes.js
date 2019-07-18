@@ -7,11 +7,13 @@ const test = require('./api/test');
 // routes
 userIdentity.register(router);
 userIdentity.login(router);
+userIdentity.logout(router);
 test(router);
 
 
 // 处理 option
 router.options("*", async ctx => {
+    console.log("==op")
     ctx.response.status = 200;
     ctx.body = "ok";
 })

@@ -30,6 +30,10 @@ function main(){
         return token;
     }
 
+    userSchema.methods.logout = function(){
+        redisClient.hdel('userTokens', this.username);
+    }
+
     const UserModel = mongoose.model('User', userSchema);
 
     UserModel.on('index', err => {

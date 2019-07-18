@@ -10,7 +10,8 @@ const crossDomain = () => {
             //允许的请求类型
             'Access-Control-Allow-Methods': "*",
             //允许的请求头字段
-            'Access-Control-Allow-Headers': '*',
+            // 'Access-Control-Allow-Headers': '*',
+            'Access-Control-Allow-Headers': "Authorization, Content-Type, Depth,User-Agent, X-File-Size, X-Requested-With, X-Requested-By, If-Modified-Since, X-File-Name, X-File-Type, Cache-Control, Origin",
             "Content-Type": "application/json;charset=utf-8"
         });
 
