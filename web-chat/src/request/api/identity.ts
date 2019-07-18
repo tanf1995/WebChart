@@ -18,6 +18,12 @@ const identity = {
             method: "POST",
             data: accent
         })
+    },
+    logout(){
+        return axios({
+            url: "/logout",
+            method: "GET"
+        })
     }
 }
 

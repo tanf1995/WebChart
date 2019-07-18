@@ -1,15 +1,36 @@
 import React from 'react';
 import styles from './index.scss';
 import { Menu, Dropdown, Avatar } from 'antd';
+import identity from '@/request/api/identity';
+import {userStore} from '@/store';
+import {withRouter} from 'react-router-dom';
+import {message} from 'antd';
 
 
 interface Props{
-    className: string
+    className: string,
+    location: any,
+    history: any,
+    match: any
 }
-const UserHeaderPortrait = ({className}: Props) => {
+const UserHeaderPortrait = ({className, history}: Props) => {
+    const handleLogout = () => {
+        identity.logout()
+            .then(res => {
+                userStore.setToken("");
+                userStore.setCookieToken("");
+                message.success("Logout success.");
+                history.push("/login");
+            })
+            .catch(err => {
+                console.log(err);
+                message.error("Logout faild!");
+            })
+    }
+
     const menu = (
         <Menu>
-            <Menu.Item key="0">
+            <Menu.Item key="0" onClick={handleLogout}>
                 退出
             </Menu.Item>
         </Menu>
@@ -26,4 +47,4 @@ const UserHeaderPortrait = ({className}: Props) => {
     )
 }
 
-export default UserHeaderPortrait;
+export default withRouter(UserHeaderPortrait);

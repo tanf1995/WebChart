@@ -1,35 +1,28 @@
-# WebChat - plan
+## 运行
 
-## 准备
+### 服务端
 
-- 复习node - 《深入浅出Nodejs》 3d
+- 安装 mongodb
 
-	- Schedule ： 2019/7/11 - 2019/7/13
+- 安装 redis
 
-	- Actual: --
+- cd /node-server && node app.js
 
-- 学习koa - 官网  5d
+### 客户端
 
-	- Schedule ： 2019/7/12 - 2019/7/16
+- cd /web-chat && yarn start
 
-	- demo: https://github.com/tanf1995/coding-record/tree/master/%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/koa
+### 修改服务端地址
 
-	- Actual: --
+> web-chat/src/request/index.ts
 
-- 学习react hook - 官网   5d
-
-	- Schedule ： 2019/7/12
-
-	- Actual: --
-
-- 学习socket.io - 官网  5d
-
-	- Schedule ： 2019/7/12
-
-	- Actual: --
-
-## 实际
-
-- UI  10d
-
-- SERVER  10d
+	...
+	let instance = axios.create({
+		- baseURL: "http://172.18.188.195:8080",
+		baseURL: // "http://服务端运行的地址:8080
+		headers: {
+			"Content-Type": 'application/json',
+			"Authorization": userStore.user.token
+		}
+	});
+	...

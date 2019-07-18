@@ -1,4 +1,5 @@
 import {observable, action} from 'mobx';
+import Cookies from 'cookies-ts';
 
 
 class UserStore{
@@ -9,6 +10,16 @@ class UserStore{
 
     @action setToken = (token: string) => {
         this.user.token = token;
+    }
+
+    setCookieToken = (token: string) => {
+        let cookies = new Cookies();
+
+        if(token){
+            cookies.set("token", token);
+        } else{
+            cookies.remove("token");
+        }
     }
 }
 
