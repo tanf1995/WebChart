@@ -1,4 +1,7 @@
 const bcrypt = require('bcryptjs');
+const dbConfig = require('./dbConfig');
+const jwt = require('jsonwebtoken');
+const redisClient = require('./redis');
 
 function main(){
     const mongoose = require('./index');
@@ -16,10 +19,21 @@ function main(){
         return bcrypt.compareSync(pwd, this.password);
     }
 
+    userSchema.methods.createToken = function(){
+        const token = jwt.sign({
+            username: this.username,
+            expires: (new Date()).getTime() + 7*24*60*60*1000
+        }, dbConfig.privateKey)
+
+        redisClient.hset("userTokens", this.username, token);
+
+        return token;
+    }
+
     const UserModel = mongoose.model('User', userSchema);
 
     UserModel.on('index', err => {
-        console.log("err: " + err);
+        if(err) console.log("err: " + err);
     })
 
     module.exports = UserModel;
@@ -28,10 +42,16 @@ function main(){
 if(require.main !== module){
     main();
 }else{
-    console.log("start")
-    const salt = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync("tanfeng", salt);
+    // console.log("start")
+    // const salt = bcrypt.genSaltSync(10);
+    // const hash = bcrypt.hashSync("tanfeng", salt);
 
-    console.log(hash);
-    console.log(bcrypt.compareSync("tanfeng", hash))
+    // console.log(hash);
+    // console.log(bcrypt.compareSync("tanfeng", hash))
+
+    jwt.verify("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRmIiwiZXhwaXJlcyI6MTU2NDAzODA4MTU4NiwiaWF0IjoxNTYzNDMzMjgxfQ.e7zKx6s2LQktrWE0Z0bSuDkx5ZBFUqKilw-XHsOp0sI", dbConfig.privateKey, (err, decode) => {
+        if(err) return console.log(err);
+
+        console.log(decode);
+    })
 }

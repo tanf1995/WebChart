@@ -8,7 +8,7 @@ const crossDomain = () => {
             //预检结果缓存时间,也就是上面说到的缓存啦
             'Access-Control-Max-Age': '1800',
             //允许的请求类型
-            'Access-Control-Allow-Methods': "GET, POST, PUT, DELETE, OPTIONS",
+            'Access-Control-Allow-Methods': "*",
             //允许的请求头字段
             'Access-Control-Allow-Headers': '*',
             "Content-Type": "application/json;charset=utf-8"
