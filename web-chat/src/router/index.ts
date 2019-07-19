@@ -1,9 +1,11 @@
 import {lazy} from 'react';
 
 const BaseContainer = lazy(() => import('@/views/BaseContainer'))
-const HomePage = lazy(() => import('@/views/HomePage'));
+const SessionContainer = lazy(() => import('@/views/SessionContainer'));
 const ChatPage = lazy(() => import('@/views/ChatPage'));
 const LoginOrRegister = lazy(() => import('@/views/LoginOrRegister'));
+const FriendsContainer = lazy(() => import('@/views/FriendsContainer'));
+const SessionHome = lazy(() => import('@/views/SessionHome'));
 
 const routes: any[] = [
     {
@@ -21,12 +23,27 @@ const routes: any[] = [
         childrenRoute: [
             {
                 path: "/",
-                RouteComponent: HomePage,
-                exact: true
+                redirect: "/session"
             },
             {
-                path: "/chat/:user",
-                RouteComponent: ChatPage,
+                path: "/session",
+                RouteComponent: SessionContainer,
+                childrenRoute: [
+                    {
+                        path: "/session",
+                        RouteComponent: SessionHome,
+                        exact: true
+                    },
+                    {
+                        path: "/session/:user",
+                        RouteComponent: ChatPage,
+                        exact: true
+                    },
+                ]
+            },
+            {
+                path: "/friend",
+                RouteComponent: FriendsContainer,
                 exact: true
             }
         ]

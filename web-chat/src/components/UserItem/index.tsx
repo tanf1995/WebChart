@@ -19,7 +19,7 @@ const UserItem = ({menuIsCollapsed, size}: Props) => {
                 size={size === "mini"? 24: 32}
             />
 
-            <span className={styles.name}>科比 布莱恩特</span>
+            <span className={styles.name}>科比 布莱恩特 勒布朗 詹姆斯</span>
         </div>
     )
 }

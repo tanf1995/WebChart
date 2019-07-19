@@ -31,7 +31,7 @@ const SessionList = ({className}: Props) => {
             >
                 {userList.map((user, index) => (
                     <Menu.Item key={index}>
-                        <Link to="/chat/kobe">
+                        <Link to="/session/kobe">
                             <UserItem menuIsCollapsed={isCollapsed} />
                         </Link>
                     </Menu.Item>

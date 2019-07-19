@@ -1,0 +1,28 @@
+.tabs{
+    :global(.ant-tabs-tab){
+        margin: 0;
+    }
+
+    :global(.ant-tabs-bar){
+        margin: 0;
+    }
+
+    :global(.ant-menu){
+        overflow: hidden;
+        min-height: 550px;
+    
+        :global(.ant-menu-item){
+            height: unset;
+            padding: 0 !important;
+            margin: 0;
+        }
+    
+        &:global(.ant-menu-inline-collapsed){
+            width: 52px;
+    
+            :global(.ant-menu-item){
+                width: 52px;
+            }
+        }
+    }
+}
