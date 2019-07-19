@@ -3,7 +3,10 @@ import styles from './index.scss';
 import FriendList from './components/FriendList';
 
 
-const FriendsDetail = () => {
+interface Props{
+    children: any
+}
+const FriendsDetail = ({children}: Props) => {
     return (
         <div className={styles.wrap}>
             <div className={styles.list}>
@@ -11,7 +14,7 @@ const FriendsDetail = () => {
             </div>
 
             <div className={styles.info}>
-                info
+                {children}
             </div>
         </div>
     )

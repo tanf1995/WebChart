@@ -4,14 +4,13 @@ import { Avatar } from 'antd';
 
 
 interface Props{
-    menuIsCollapsed?: boolean,
-    size?: "default" | "mini"
+    size?: "default" | "mini",
+    nickname: string
 }
-const UserItem = ({menuIsCollapsed, size}: Props) => {
+const UserItem = ({size, nickname}: Props) => {
     return (
         <div className={[
                 styles.user,
-                menuIsCollapsed? styles.collapsed: "",
                 size === "mini"? styles.mini: ""
             ].join(" ")}
         >
@@ -19,7 +18,7 @@ const UserItem = ({menuIsCollapsed, size}: Props) => {
                 size={size === "mini"? 24: 32}
             />
 
-            <span className={styles.name}>科比 布莱恩特 勒布朗 詹姆斯</span>
+            <span className={styles.name}>{nickname}</span>
         </div>
     )
 }

@@ -6,6 +6,7 @@ const ChatPage = lazy(() => import('@/views/ChatPage'));
 const LoginOrRegister = lazy(() => import('@/views/LoginOrRegister'));
 const FriendsContainer = lazy(() => import('@/views/FriendsContainer'));
 const SessionHome = lazy(() => import('@/views/SessionHome'));
+const FriendsHome = lazy(() => import('@/views/FriendsHome'));
 
 const routes: any[] = [
     {
@@ -44,7 +45,13 @@ const routes: any[] = [
             {
                 path: "/friend",
                 RouteComponent: FriendsContainer,
-                exact: true
+                childrenRoute: [
+                    {
+                        path: "/friend",
+                        RouteComponent: FriendsHome,
+                        exact: true
+                    }
+                ]
             }
         ]
     }

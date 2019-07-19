@@ -1,8 +1,10 @@
 .user{
-    height: 60px;
+    height: 46px;
     padding: 5px 10px;
     border-bottom: 1px solid #eee;
     width: 200px;
+    overflow: hidden;
+    box-sizing: content-box;
 
     :global(.ant-avatar){
         text-align: center;
@@ -17,14 +19,9 @@
         margin-left: 10px;
     }
 
-    &.collapsed{
-        .name{
-            // display: none;
-        }
-    }
-
     &.mini{
-        height: 40px;
+        height: 32px;
+        line-height: 32px;
 
         :global(.ant-avatar){
             i{

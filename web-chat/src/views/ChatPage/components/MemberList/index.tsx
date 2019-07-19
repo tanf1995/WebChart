@@ -9,7 +9,7 @@ const MemberList = () => {
     return (
         <div className={styles.members}>
             {members.map((member, index) => (
-                <UserItem key={index} size="mini" />
+                <UserItem key={index} size="mini" nickname="kobe" />
             ))}
         </div>
     )
