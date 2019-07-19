@@ -79,18 +79,23 @@ function main(){
 if(require.main !== module){
     main();
 }else{
-    // UserModel.findOne({username: "tf"}, (err, user) => {
-    //     if(err) return console.log(err);
+    async function test(){
+        try{
+            const li = await UserModel.find({username: {$ne: "tf"}})
+            console.log(li);
+        }catch(err){
+            console.log(err);
+        }
+    }
 
-    //     console.log(user);
-    // })
+    test();
 
-    const token = jwt.sign({
-        name: "zs",
-        time: (new Date()).getTime()
-    }, dbConfig.privateKey)
+    // const token = jwt.sign({
+    //     name: "zs",
+    //     time: (new Date()).getTime()
+    // }, dbConfig.privateKey)
 
-    console.log(token);
-    const decode = jwt.verify(token, dbConfig.privateKey);
-    console.log(decode);
+    // console.log(token);
+    // const decode = jwt.verify(token, dbConfig.privateKey);
+    // console.log(decode);
 }

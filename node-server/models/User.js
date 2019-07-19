@@ -34,6 +34,15 @@ function main(){
         redisClient.hdel('userTokens', this.username);
     }
 
+    userSchema.methods.ret_strangers = async function(limit=10, offset=0){
+        try{
+            const strangers = await UserModel.find({username: {$ne: this.username}});
+            return strangers;
+        }catch(err){
+            return [];
+        }
+    }
+
     const UserModel = mongoose.model('User', userSchema);
 
     UserModel.on('index', err => {
@@ -53,9 +62,9 @@ if(require.main !== module){
     // console.log(hash);
     // console.log(bcrypt.compareSync("tanfeng", hash))
 
-    jwt.verify("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRmIiwiZXhwaXJlcyI6MTU2NDAzODA4MTU4NiwiaWF0IjoxNTYzNDMzMjgxfQ.e7zKx6s2LQktrWE0Z0bSuDkx5ZBFUqKilw-XHsOp0sI", dbConfig.privateKey, (err, decode) => {
-        if(err) return console.log(err);
+    // jwt.verify("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRmIiwiZXhwaXJlcyI6MTU2NDAzODA4MTU4NiwiaWF0IjoxNTYzNDMzMjgxfQ.e7zKx6s2LQktrWE0Z0bSuDkx5ZBFUqKilw-XHsOp0sI", dbConfig.privateKey, (err, decode) => {
+    //     if(err) return console.log(err);
 
-        console.log(decode);
-    })
+    //     console.log(decode);
+    // })
 }
