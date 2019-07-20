@@ -12,7 +12,9 @@ function main(){
             index: true,
             unique: true
         },
-        password: String
+        password: String,
+        description: String,
+        nickname: String
     })
 
     userSchema.methods.checkPwd = function(pwd){

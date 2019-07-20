@@ -16,6 +16,7 @@ function main(){
                 }
             }catch(err){
                 console.log(err);
+                return commonRes.server_error(ctx);
             }
 
             let user = new UserModel({

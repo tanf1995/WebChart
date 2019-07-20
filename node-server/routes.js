@@ -3,6 +3,7 @@ const router = new Router();
 const userIdentity = require('./api/userIdentity');
 const test = require('./api/test');
 const stranger = require('./api/stranger');
+const userInfo = require('./api/userInfo');
 
 
 // routes
@@ -10,6 +11,7 @@ userIdentity.register(router);
 userIdentity.login(router);
 userIdentity.logout(router);
 stranger.strangers(router);
+userInfo(router);
 test(router);
 
 
