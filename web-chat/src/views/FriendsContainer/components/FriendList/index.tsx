@@ -24,7 +24,7 @@ const FriendList = () => {
                 })
                 .catch(err => console.log(err));
         }
-    })
+    }, [strangerList.length])
 
     return (
         <Tabs defaultActiveKey="2" size="small"

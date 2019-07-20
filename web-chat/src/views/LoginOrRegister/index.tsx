@@ -7,6 +7,7 @@ import identity from '@/request/api/identity';
 import {observer} from 'mobx-react';
 import Cookies from 'cookies-ts';
 import axiosIns from '@/request';
+import {userStore} from '@/store';
 
 
 interface Props{
@@ -19,17 +20,22 @@ interface Accent{
     pwd?: string
 }
 const LoginOrRegister = ({match, history, location}: Props) => {
+    // 帐户信息
     const [accent, setAccent] = useState({
         username: "",
         pwd: ""
     });
+    // 判断登陆还是注册
     const [isLoginPage, setIsLoginPage] = useState(true);
+    // 登陆按钮状态
+    const [reqIsReady, setReqStatus] = useState(true);
     const handleSetAccent = (partOfAccent: Accent) => {
         setAccent(Object.assign({}, accent, partOfAccent));
     }
     const handleLogin = (token: string) => {
         const whiteRoute = ["/login", "/register"];
 
+        userStore.setToken(token);
         axiosIns.defaults.headers["Authorization"] = token;
         (new Cookies()).set("token", token);
         if(location.state && location.state.from && !whiteRoute.includes(location.state.from)){
@@ -42,9 +48,12 @@ const LoginOrRegister = ({match, history, location}: Props) => {
         if(!accent.username || !accent.pwd){
             return message.error('Your account is incorrect!');
         }
+        if(!reqIsReady) return;
+        setReqStatus(false);
         if(isLoginPage){
             identity.login(accent)
                 .then(res => {
+                    // console.log(res);
                     if(res.data.errCode === 0){
                         message.success("Login success!");
                         handleLogin(res.data.data.token);
@@ -56,6 +65,7 @@ const LoginOrRegister = ({match, history, location}: Props) => {
                     console.log(err);
                     message.error('Server error!');
                 })
+                .finally(() => setReqStatus(true)) 
         }else{
             identity.register(accent)
                 .then(res => {
@@ -70,6 +80,7 @@ const LoginOrRegister = ({match, history, location}: Props) => {
                     console.log(err);
                     message.error('Server error!');
                 })
+                .finally(() => setReqStatus(true)) 
         }
     }
     const handleKeydown = (e: any) => {
@@ -99,7 +110,12 @@ const LoginOrRegister = ({match, history, location}: Props) => {
                 />
             </div>
             
-            <Button className={styles.sub} onClick={handleSubmit}>submit</Button>
+            <Button className={styles.sub} 
+                onClick={handleSubmit}
+                loading={!reqIsReady}
+            >
+                submit
+            </Button>
             {
                 isLoginPage? (
                     <Link to="/register">go to register</Link>
