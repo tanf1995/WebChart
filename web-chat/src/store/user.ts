@@ -4,12 +4,14 @@ import Cookies from 'cookies-ts';
 
 interface UserInfo{
     username: string,
-    nickname?: string
+    nickname: string,
+    avatarUrl: string
 }
 class UserStore{
     @observable user = {
         username: "",
         nickname: "",
+        avatarUrl: "",
         token: ""
     }
 

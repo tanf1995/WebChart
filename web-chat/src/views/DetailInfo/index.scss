@@ -21,6 +21,35 @@
             bottom: -20px;
             right: 15px;
         }
+
+        .upload{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: rgba(100, 100, 100, 0.4);
+
+            :global(.ant-btn){
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 80px;
+                height: 80px;
+                font-size: 40px;
+
+                input{
+                    position: absolute;
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                    opacity: 0;
+                }
+            }
+        }
     }
 
     .info{

@@ -7,6 +7,7 @@ import {withRouter} from 'react-router-dom';
 import {message} from 'antd';
 import userInfo from '@/request/api/userInfo';
 import {observer} from 'mobx-react';
+import {baseUrl} from '@/request';
 
 
 interface Props{
@@ -39,7 +40,13 @@ const UserHeaderPortrait = ({className, history}: Props) => {
     useEffect(() => {
         userInfo.get()
             .then(res => {
-                userStore.setUserInfo(res.data.data);
+                let userInfo = res.data.data;
+
+                userStore.setUserInfo({
+                    username: userInfo.username,
+                    nickname: userInfo.nickname,
+                    avatarUrl: baseUrl + userInfo.avatarUrl
+                });
             })
             .catch(err => console.log(err))
     })
@@ -60,10 +67,10 @@ const UserHeaderPortrait = ({className, history}: Props) => {
             <Dropdown overlay={menu} trigger={['click']}
                 overlayClassName={styles.menu}
             >
-                <Avatar size={40} icon="user" />
+                <Avatar size={40}  src={userStore.user.avatarUrl} />
             </Dropdown>
         </div>
     )
 }
 
-export default observer(withRouter(UserHeaderPortrait));
+export default withRouter(observer(UserHeaderPortrait))

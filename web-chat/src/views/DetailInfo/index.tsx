@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import styles from './index.scss';
 import {Button, Input, message } from 'antd';
-import avatar from '@/assets/images/avatar.jpg';
 import {userStore} from '@/store';
 import userInfoApi from '@/request/api/userInfo';
+import {uploadImgApi} from '@/request/api/uploadFile';
+import {baseUrl} from '@/request';
 
 
 interface Props{
@@ -11,11 +12,12 @@ interface Props{
 }
 const DetailInfo = ({match}: Props) =>  {
     // 判断是个人信息还是朋友信息
-    const [myDetail, setMyDetail] = useState(false);
+    const [myDetail, setMyDetail] = useState(true);
     const [userInfo, setUserInfo] = useState({
         nickname: "",
         description: "",
-        username: ""
+        username: "",
+        avatar: ""
     });
     // 判断是否编辑信息
     const [infoChanged, setInfoChangedStatus] = useState(false);
@@ -34,7 +36,8 @@ const DetailInfo = ({match}: Props) =>  {
                 setUserInfo({
                     username: userInfo.username,
                     nickname: userInfo.nickname,
-                    description: userInfo.description
+                    description: userInfo.description,
+                    avatar: userInfo.avatarUrl
                 })
             })
             .catch(err => console.log(err))
@@ -58,6 +61,39 @@ const DetailInfo = ({match}: Props) =>  {
         setUserInfo(Object.assign({}, userInfo, new_userInfo));
     }
 
+    // 头像
+    const handleUpload = (e: any) => {
+        let reader = new FileReader();
+        
+        try{
+            reader.readAsDataURL(e.target.files[0]);
+            reader.onload = (e: any) => {
+                let photo = e.target.result;
+                let photo_data = photo.replace(/data:image\/(.*)base64,/, "");
+                let reg = /data:image\/([\s\S]+);base64/;
+                let result = reg.exec(photo) || ["", "jpg"];
+
+                uploadImgApi.post({
+                    data: photo_data,
+                    suffix: result[1]
+                })
+                    .then(res => {
+                        setUserInfo(Object.assign({}, userInfo, {
+                            avatar: baseUrl + res.data.data.avatarUrl + "?t=" + Math.random()
+                        }))
+                        message.success("upload avatar success");
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        message.error("upload avatar failed!");
+                    })
+            }
+        }catch(err){
+            console.log(err);
+            message.error("image error!"); 
+        }
+    }
+
     const handleSaveInfo = () => {
         setEditStatus(false);
         if(!infoChanged) return;
@@ -77,7 +113,18 @@ const DetailInfo = ({match}: Props) =>  {
     return (
         <div className={styles.wrap}>
             <div className={styles.avatar}>
-                <img src={avatar} alt=""/>
+                <img src={baseUrl + userInfo.avatar} alt=""/>
+
+                {isEdit? (
+                    <div className={styles.upload}>
+                        <Button shape="circle" icon="upload">
+                            <input type="file" 
+                                accept="image/png, image/jpeg, image/jpg"
+                                onChange={handleUpload}
+                            />
+                        </Button>
+                    </div>
+                ): null}
 
                 {!myDetail? (
                     <Button shape="circle" icon="message" size="large"

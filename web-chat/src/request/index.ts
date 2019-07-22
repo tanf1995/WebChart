@@ -3,8 +3,14 @@ import {userStore} from '@/store';
 import Cookies from 'cookies-ts';
 
 
+let baseUrl = "";
+
+if(process.env.NODE_ENV === 'development'){
+    baseUrl = "http://192.168.0.103:8080"
+}
+
 let instance = axios.create({
-    baseURL: "http://192.168.0.103:8080",
+    baseURL: baseUrl,
     headers: {
         "Content-Type": 'application/json',
         "Authorization": userStore.user.token
@@ -32,5 +38,7 @@ instance.interceptors.response.use(
     }
 );
 
+
+export {baseUrl}
 
 export default instance;
