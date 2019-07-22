@@ -11,7 +11,7 @@ const permissionRouteControl = require('./middleware/permissionRouteControl');
 app.use(KoaBody());
 app.use(crossDomain());
 app.use(consoleReq());
-const whiteRoutes = ['/login', '/register'];
+const whiteRoutes = ['/login', '/register', '/media'];
 app.use(permissionRouteControl(whiteRoutes));
 
 // router

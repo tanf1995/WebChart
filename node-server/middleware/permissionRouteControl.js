@@ -11,7 +11,7 @@ const permissionRouteControl = (whiteRoutes) => {
             return await next();
         }
 
-        if(!whiteRoutes.includes(ctx.request.url)){
+        if(whiteRoutes.every(path => ctx.request.url.indexOf(path) !== 0)){
             const token = ctx.request.headers["authorization"];
 
             try{

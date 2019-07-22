@@ -19,7 +19,8 @@ const userInfo = router => {
         commonReq.ok(ctx, 0, "ok", {
             username: current_user.username,
             nickname: current_user.nickname || current_user.username,
-            description: current_user.description
+            description: current_user.description,
+            avatarUrl: current_user.avatarUrl
         });
     })
 

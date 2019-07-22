@@ -14,7 +14,8 @@ function main(){
         },
         password: String,
         description: String,
-        nickname: String
+        nickname: String,
+        avatarUrl: String
     })
 
     userSchema.methods.checkPwd = function(pwd){

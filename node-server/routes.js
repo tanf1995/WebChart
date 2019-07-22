@@ -4,6 +4,8 @@ const userIdentity = require('./api/userIdentity');
 const test = require('./api/test');
 const stranger = require('./api/stranger');
 const userInfo = require('./api/userInfo');
+const fileUpload = require('./api/fileUpload');
+const staticSource = require('./api/staticFile');
 
 
 // routes
@@ -12,6 +14,8 @@ userIdentity.login(router);
 userIdentity.logout(router);
 stranger.strangers(router);
 userInfo(router);
+fileUpload.avatarUpload(router);
+staticSource.avatarResource(router);
 test(router);
 
 
