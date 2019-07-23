@@ -49,7 +49,7 @@ const UserHeaderPortrait = ({className, history}: Props) => {
                 });
             })
             .catch(err => console.log(err))
-    })
+    }, [userStore.user.avatarUrl])
 
     const menu = (
         <Menu>
@@ -67,7 +67,7 @@ const UserHeaderPortrait = ({className, history}: Props) => {
             <Dropdown overlay={menu} trigger={['click']}
                 overlayClassName={styles.menu}
             >
-                <Avatar size={40}  src={userStore.user.avatarUrl} />
+                <Avatar size={40} src={userStore.user.avatarUrl} />
             </Dropdown>
         </div>
     )

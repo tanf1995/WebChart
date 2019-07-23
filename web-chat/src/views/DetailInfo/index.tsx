@@ -8,9 +8,10 @@ import {baseUrl} from '@/request';
 
 
 interface Props{
-    match: any
+    match: any,
+    history: any
 }
-const DetailInfo = ({match}: Props) =>  {
+const DetailInfo = ({match, history}: Props) =>  {
     // 判断是个人信息还是朋友信息
     const [myDetail, setMyDetail] = useState(true);
     const [userInfo, setUserInfo] = useState({
@@ -37,7 +38,7 @@ const DetailInfo = ({match}: Props) =>  {
                     username: userInfo.username,
                     nickname: userInfo.nickname,
                     description: userInfo.description,
-                    avatar: userInfo.avatarUrl
+                    avatar: baseUrl + userInfo.avatarUrl
                 })
             })
             .catch(err => console.log(err))
@@ -113,7 +114,7 @@ const DetailInfo = ({match}: Props) =>  {
     return (
         <div className={styles.wrap}>
             <div className={styles.avatar}>
-                <img src={baseUrl + userInfo.avatar} alt=""/>
+                <img src={userInfo.avatar} alt=""/>
 
                 {isEdit? (
                     <div className={styles.upload}>
@@ -129,6 +130,7 @@ const DetailInfo = ({match}: Props) =>  {
                 {!myDetail? (
                     <Button shape="circle" icon="message" size="large"
                         className={styles.btn}
+                        onClick={() => history.push("/session/" + match.params.name)}
                     />
                 ): !isEdit? (
                     <Button shape="circle" icon="edit" size="large"

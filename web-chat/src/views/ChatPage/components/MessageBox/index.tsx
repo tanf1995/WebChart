@@ -1,11 +1,19 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styles from './index.scss';
 import { Button, Input } from 'antd'
 import MessageItem from '@/components/MessageItem';
+import initSocket from '@/socketio';
 
 
 const MessageBox = () => {
     const [msgList] = useState(["", ""]);
+
+    useEffect(() => {
+        const socket = initSocket();
+
+        socket.listen();
+        socket.sendMsg("hello")
+    })
 
     return (
         <div className={styles.msgBox}>
