@@ -15,7 +15,10 @@ function main(){
         password: String,
         description: String,
         nickname: String,
-        avatarUrl: String
+        avatarUrl: {
+            type: String,
+            default: "/media/avatars/default.jpg"
+        }
     })
 
     userSchema.methods.checkPwd = function(pwd){

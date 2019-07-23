@@ -6,6 +6,8 @@
     "koa": "^2.7.0",
     "koa-body": "^4.1.0",
     "koa-router": "^7.4.0",
-    "mongoose": "5.0.15"
+    "koa-socket": "^4.4.0",
+    "mongoose": "5.0.15",
+    "socket.io": "^2.2.0"
   }
 }
